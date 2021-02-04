@@ -1,26 +1,14 @@
 package gosub
 
 import (
-	"bufio"
-	"fmt"
-	"os"
+	"github.com/arman-aminian/gosub/parsers"
 )
 
 func Parse(path string) error {
-	file, err := os.Open(path)
+	srt := parsers.NewSrt()
+	err := srt.Parse(path)
 	if err != nil {
 		panic(err)
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		fmt.Println("next line:")
-		fmt.Println(scanner.Text())
-	}
-
-	if err := scanner.Err(); err != nil {
-		return err
 	}
 	return nil
 }

@@ -1,5 +1,5 @@
 package parsers
 
 type parser interface {
-	parse(string) error
+	Parse(string) error
 }
