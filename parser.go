@@ -4,15 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"time"
 )
-
-type Line struct {
-	Text  string
-	Start time.Time
-	End   time.Time
-	WPM   int
-}
 
 func Parse(path string) error {
 	file, err := os.Open(path)
