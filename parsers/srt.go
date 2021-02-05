@@ -3,7 +3,6 @@ package parsers
 import (
 	"bufio"
 	"errors"
-	"fmt"
 	"os"
 	"strings"
 	"time"
@@ -26,31 +25,32 @@ func (*Srt) Parse(path string) ([]Line, error) {
 	}
 	defer file.Close()
 
+	var lines []Line
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
-		fmt.Println("next line:")
-		fmt.Println(scanner.Text())
 		line := scanner.Text()
 		if line == "" {
 			continue
 		}
 		if strings.Contains(line, SrtTimestampSeparator) {
-			start, end, err := parseTimestamps(line)
+			var l Line
+			l.Start, l.End, err = parseTimestamps(line)
 			if err != nil {
 				return nil, err
 			}
-			fmt.Println(start, end)
+
 			if scanner.Scan() {
-				text := scanner.Text()
-				fmt.Println("value : ", text)
+				l.Text = scanner.Text()
 			}
+
+			lines = append(lines, l)
 		}
 	}
 
 	if err := scanner.Err(); err != nil {
 		return nil, err
 	}
-	return nil, nil
+	return lines, nil
 }
 
 func parseTimestamps(line string) (time.Time, time.Time, error) {
