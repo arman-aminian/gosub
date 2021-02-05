@@ -11,6 +11,6 @@ func Parse(path string) error {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(lines)
+	fmt.Println(lines[2].WPM)
 	return nil
 }

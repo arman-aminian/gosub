@@ -3,6 +3,7 @@ package parsers
 import (
 	"bufio"
 	"errors"
+	"math"
 	"os"
 	"strings"
 	"time"
@@ -45,6 +46,9 @@ func (*Srt) Parse(path string) ([]Line, error) {
 
 			if scanner.Scan() {
 				l.Text = scanner.Text()
+				wn := WordsCount(l.Text)
+				t := l.End.Sub(l.Start).Minutes()
+				l.WPM = int(math.Round(float64(wn) / t))
 			}
 
 			lines = append(lines, l)
@@ -60,20 +64,20 @@ func (*Srt) Parse(path string) ([]Line, error) {
 func parseTimestamps(line string) (time.Time, time.Time, error) {
 	times := strings.Split(line, SrtTimestampSeparator)
 	if len(times) != 2 {
-		return time.Time{}, time.Time{}, errors.New("invalid timestamps")
+		return time.Time{}, time.Time{}, errors.New(InvalidTimeErr)
 	}
 
 	times[0] = convertToTimeFormat(times[0])
 	times[1] = convertToTimeFormat(times[1])
 
-	s, err := time.Parse("15:04:05.000", times[0])
+	s, err := time.Parse(TimeLayout, times[0])
 	if err != nil {
-		return time.Time{}, time.Time{}, errors.New("invalid timestamps")
+		return time.Time{}, time.Time{}, errors.New(InvalidTimeErr)
 	}
 
-	e, err := time.Parse("15:04:05.000", times[1])
+	e, err := time.Parse(TimeLayout, times[1])
 	if err != nil {
-		return time.Time{}, time.Time{}, errors.New("invalid timestamps")
+		return time.Time{}, time.Time{}, errors.New(InvalidTimeErr)
 	}
 	return s, e, nil
 }
