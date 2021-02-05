@@ -50,7 +50,7 @@ func (*Srt) Parse(path string) ([]Line, error) {
 	if err := scanner.Err(); err != nil {
 		return nil, err
 	}
-	return nil
+	return nil, nil
 }
 
 func parseTimestamps(line string) (time.Time, time.Time, error) {
@@ -78,5 +78,13 @@ func convertToTimeFormat(s string) string {
 	if !strings.Contains(s, ",") {
 		return s + ".000"
 	}
-	return ""
+
+	sl := strings.Split(s, ",")
+	if len(sl[1]) > 3 {
+		sl[1] = sl[1][0:3]
+	}
+	for len(sl[1]) < 3 {
+		sl[1] = sl[1] + "0"
+	}
+	return sl[0] + "." + sl[1]
 }
