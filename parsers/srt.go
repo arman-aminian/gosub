@@ -18,6 +18,10 @@ func NewSrt() *Srt {
 	}
 }
 
+func (s *Srt) GetLines() []Line {
+	return s.lines
+}
+
 func (*Srt) Parse(path string) ([]Line, error) {
 	file, err := os.Open(path)
 	if err != nil {
