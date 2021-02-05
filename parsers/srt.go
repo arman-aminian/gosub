@@ -44,12 +44,21 @@ func (*Srt) Parse(path string) ([]Line, error) {
 				return nil, err
 			}
 
-			if scanner.Scan() {
-				l.Text = scanner.Text()
-				wn := WordsCount(l.Text)
-				t := l.End.Sub(l.Start).Minutes()
-				l.WPM = int(math.Round(float64(wn) / t))
+			l.Text = ""
+			for scanner.Scan() {
+				text := scanner.Text()
+				if text == "" {
+					break
+				}
+				if l.Text == "" {
+					l.Text += text
+				} else {
+					l.Text += "\n" + text
+				}
 			}
+			wn := WordsCount(l.Text)
+			t := l.End.Sub(l.Start).Minutes()
+			l.WPM = int(math.Round(float64(wn) / t))
 
 			lines = append(lines, l)
 		}
