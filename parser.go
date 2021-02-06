@@ -12,9 +12,7 @@ func Parse(path string) (*parsers.Srt, error) {
 	}
 
 	//max := cleaners.RemoveTags(srt.Lines)
-	//for _, line := range max {
-	//	fmt.Println(line.Text)
-	//}
+
 	//max := parsers.CalculateMaxWpm(srt, 0, len(srt.Lines))
 	//fmt.Println(max)
 	//mean := parsers.CalculateMeanWpm(srt, 0, len(srt.Lines))

@@ -1,0 +1,16 @@
+0
+00:00:00,000 --> 00:00:30,050
+first line [test test] of subtitle
+
+1
+00:01:21,062 --> 00:01:26,361
+second line <i> test test<\i> of subtitle
+
+2
+00:01:26,565 --> 00:01:32,564
+third line of subtitle
+third 2
+
+3
+00:01:32,768 --> 00:01:37,967
+Make IT lowerCase
