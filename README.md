@@ -21,7 +21,7 @@ if err != nil {
 ```
 ___
 
-## Line Class
+## Line Struct
 
 Each line of a subtitle is represented with a `Line` struct with the following properties:
 
