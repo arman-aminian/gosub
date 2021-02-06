@@ -23,10 +23,10 @@ func (s *Srt) GetLines() []Line {
 	return s.lines
 }
 
-func (*Srt) Parse(path string) ([]Line, error) {
+func (s *Srt) Parse(path string) error {
 	file, err := os.Open(path)
 	if err != nil {
-		return nil, err
+		return err
 	}
 	defer file.Close()
 
@@ -41,7 +41,7 @@ func (*Srt) Parse(path string) ([]Line, error) {
 			var l Line
 			l.Start, l.End, err = parseTimestamps(line)
 			if err != nil {
-				return nil, err
+				return err
 			}
 
 			l.Text = ""
@@ -65,9 +65,10 @@ func (*Srt) Parse(path string) ([]Line, error) {
 	}
 
 	if err := scanner.Err(); err != nil {
-		return nil, err
+		return err
 	}
-	return lines, nil
+	s.lines = lines
+	return nil
 }
 
 func parseTimestamps(line string) (time.Time, time.Time, error) {

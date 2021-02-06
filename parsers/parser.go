@@ -1,7 +1,7 @@
 package parsers
 
 type Parser interface {
-	Parse(string) ([]Line, error)
+	Parse(string) error
 	GetLines() []Line
 }
 
