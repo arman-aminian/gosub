@@ -47,3 +47,18 @@ third 2
 Make IT lowerCase
 
 ```
+## Cleaners
+
+Currently, 3 cleaners are provided:
+
+* `RemoveBrackets` will remove anything between them (e.g., `[test test]`)
+* `RemoveTags` will remove formatting keys like `<i>` and `</i>` and also anything between them.
+* `LowerCase` will lower case all text. 
+
+## WPM
+
+Calculate wpm(word per minute):
+
+* `CalculateMaxWpm` will find the Max WPM.
+* `CalculateMinWpm` will find the min WPM.
+* `CalculateMeanWpm` will find the mean WPM.
