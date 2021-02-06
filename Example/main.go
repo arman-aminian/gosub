@@ -1,27 +1,23 @@
 package main
 
-import "github.com/arman-aminian/gosub"
+import (
+	"fmt"
+	"github.com/arman-aminian/gosub"
+	"github.com/arman-aminian/gosub/cleaners"
+	"github.com/arman-aminian/gosub/parsers"
+)
 
 func main() {
-	//str := "asdfghjk"
-	//str = str[0:4]
-	//println(str)
-	//t, err := time.Parse("15:04:05.000", "00:03:47.305")
-	//t2, err := time.Parse("15:04:05.000", "00:03:44.305")
-	//if err != nil {
-	//	panic(err)
-	//}
-	//fmt.Println(t.Sub(t2).Seconds())
-	//fmt.Println(t.Sub(t2).Minutes())
-	//x := t.Sub(t2).Minutes()
-	//y := 1
-	//z := float64(y) / x
-	//println(z)
-	//if t2.After(t) {
-	//	println("inja")
-	//}
-	err := gosub.Parse("./Example/adele.srt")
+	s, err := gosub.Parse("./Example/adele.srt")
 	if err != nil {
 		panic(err)
 	}
+
+	fmt.Println(parsers.CalculateMaxWpm(s, 0, s.Size))
+	fmt.Println(parsers.CalculateMinWpm(s, 0, s.Size))
+	fmt.Println(parsers.CalculateMeanWpm(s, 0, s.Size))
+
+	fmt.Println(cleaners.LowerCase(s.GetLines()))
+	fmt.Println(cleaners.RemoveBrackets(s.GetLines()))
+	fmt.Println(cleaners.RemoveTags(s.GetLines()))
 }
