@@ -6,8 +6,8 @@ import (
 )
 
 func LowerCase(lines []parsers.Line) []parsers.Line {
-	for _, l := range lines {
-		l.Text = strings.ToLower(l.Text)
+	for i := range lines {
+		lines[i].Text = strings.ToLower(lines[i].Text)
 	}
 	return lines
 }
