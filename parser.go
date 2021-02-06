@@ -13,7 +13,7 @@ func Parse(path string) error {
 		panic(err)
 	}
 
-	max := cleaners.RemoveBrackets(srt.Lines)
+	max := cleaners.RemoveTags(srt.Lines)
 	for _, line := range max {
 		fmt.Println(line.Text)
 	}
