@@ -10,17 +10,19 @@ import (
 )
 
 type Srt struct {
-	lines []Line
+	Lines []Line
+	Size  int
 }
 
 func NewSrt() *Srt {
 	return &Srt{
-		lines: []Line{},
+		Lines: []Line{},
+		Size:  0,
 	}
 }
 
 func (s *Srt) GetLines() []Line {
-	return s.lines
+	return s.Lines
 }
 
 func (s *Srt) Parse(path string) error {
@@ -67,7 +69,8 @@ func (s *Srt) Parse(path string) error {
 	if err := scanner.Err(); err != nil {
 		return err
 	}
-	s.lines = lines
+	s.Lines = lines
+	s.Size = len(lines)
 	return nil
 }
 

@@ -7,11 +7,13 @@ import (
 
 func Parse(path string) error {
 	srt := parsers.NewSrt()
-	lines, err := srt.Parse(path)
+	err := srt.Parse(path)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(lines[2].WPM)
-	fmt.Println(lines[2].Text)
+	max := parsers.CalculateMaxWpm(srt, 0, len(srt.Lines))
+	fmt.Println(max)
+	//fmt.Println(srt.Lines[2].WPM)
+	//fmt.Println(srt.Lines[2].Text)
 	return nil
 }
