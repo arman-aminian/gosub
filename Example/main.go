@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	s, err := gosub.Parse("./Example/adele.srt")
+	s, err := gosub.Parse("./Example/test.srt")
 	if err != nil {
 		panic(err)
 	}
