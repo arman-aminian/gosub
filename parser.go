@@ -13,6 +13,9 @@ func Parse(path string) error {
 	}
 	max := parsers.CalculateMaxWpm(srt, 0, len(srt.Lines))
 	fmt.Println(max)
+	mean := parsers.CalculateMeanWpm(srt, 0, len(srt.Lines))
+	fmt.Println(mean)
+
 	//fmt.Println(srt.Lines[2].WPM)
 	//fmt.Println(srt.Lines[2].Text)
 	return nil

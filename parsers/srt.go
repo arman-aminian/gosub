@@ -60,7 +60,11 @@ func (s *Srt) Parse(path string) error {
 			}
 			wn := WordsCount(l.Text)
 			t := l.End.Sub(l.Start).Minutes()
-			l.WPM = int(math.Round(float64(wn) / t))
+			if t == 0 {
+				l.WPM = 0
+			} else {
+				l.WPM = int(math.Round(float64(wn) / t))
+			}
 
 			lines = append(lines, l)
 		}
