@@ -37,3 +37,11 @@ func CalculateMeanWpm(p Parser, from, to int) int {
 	}
 	return sum / len(lines)
 }
+
+func TotalWordCount(p Parser) int {
+	sum := 0
+	for _, line := range p.GetLines() {
+		sum += WordsCount(line.Text)
+	}
+	return sum
+}

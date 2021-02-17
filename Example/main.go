@@ -22,6 +22,7 @@ func main() {
 	fmt.Println(parsers.CalculateMaxWpm(s, 0, s.Size))
 	fmt.Println(parsers.CalculateMinWpm(s, 0, s.Size))
 	fmt.Println(parsers.CalculateMeanWpm(s, 0, s.Size))
+	fmt.Println(parsers.TotalWordCount(s))
 
 	fmt.Println(cleaners.LowerCase(s.GetLines()))
 	fmt.Println()
