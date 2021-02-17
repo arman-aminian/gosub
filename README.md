@@ -1,7 +1,13 @@
 # gosub
 Utility to extract the contents of a subtitle file
 * `srt`: [SubRip](https://en.wikipedia.org/wiki/SubRip)
-* other types will supported as soon as possible :)
+* other types will be supported as soon as possible :)
+
+## Installation
+Installation is done using `go get`.
+```
+go get -u github.com/arman-aminian/gosub
+```
 
 ## Usage
 The method parse requires the following parameters:
@@ -15,7 +21,7 @@ if err != nil {
 ```
 ___
 
-## Line Class
+## Line Struct
 
 Each line of a subtitle is represented with a `Line` struct with the following properties:
 
