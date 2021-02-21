@@ -5,13 +5,24 @@ import (
 	"github.com/arman-aminian/gosub"
 	"github.com/arman-aminian/gosub/cleaners"
 	"github.com/arman-aminian/gosub/parsers"
+	"os"
 )
 
 func main() {
-	s, err := gosub.Parse("./Example/test.srt")
+	file, err := os.Open("./Example/test.srt")
 	if err != nil {
 		panic(err)
 	}
+	defer file.Close()
+	s, err := gosub.ParseByFile(file)
+	if err != nil {
+		panic(err)
+	}
+
+	//s, err := gosub.Parse("./Example/test.srt")
+	//if err != nil {
+	//	panic(err)
+	//}
 
 	for _, line := range s.Lines {
 		fmt.Println(line.Start, " -> ", line.End)

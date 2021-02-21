@@ -78,6 +78,54 @@ func (s *Srt) Parse(path string) error {
 	return nil
 }
 
+func (s *Srt) ParseByFile(f *os.File) error {
+	var lines []Line
+	scanner := bufio.NewScanner(f)
+	for scanner.Scan() {
+		line := scanner.Text()
+		if line == "" {
+			continue
+		}
+		if strings.Contains(line, SrtTimestampSeparator) {
+			var l Line
+			var err error
+			l.Start, l.End, err = parseTimestamps(line)
+			if err != nil {
+				return err
+			}
+
+			l.Text = ""
+			for scanner.Scan() {
+				text := scanner.Text()
+				if text == "" {
+					break
+				}
+				if l.Text == "" {
+					l.Text += text
+				} else {
+					l.Text += "\n" + text
+				}
+			}
+			wn := WordsCount(l.Text)
+			t := l.End.Sub(l.Start).Minutes()
+			if t == 0 {
+				l.WPM = 0
+			} else {
+				l.WPM = int(math.Round(float64(wn) / t))
+			}
+
+			lines = append(lines, l)
+		}
+	}
+
+	if err := scanner.Err(); err != nil {
+		return err
+	}
+	s.Lines = lines
+	s.Size = len(lines)
+	return nil
+}
+
 func parseTimestamps(line string) (time.Time, time.Time, error) {
 	times := strings.Split(line, SrtTimestampSeparator)
 	if len(times) != 2 {
