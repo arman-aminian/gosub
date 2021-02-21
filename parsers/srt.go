@@ -78,9 +78,9 @@ func (s *Srt) Parse(path string) error {
 	return nil
 }
 
-func (s *Srt) ParseByFile(f *os.File) error {
+func (s *Srt) ParseByFile(f []byte) error {
 	var lines []Line
-	scanner := bufio.NewScanner(f)
+	scanner := bufio.NewScanner(strings.NewReader(string(f)))
 	for scanner.Scan() {
 		line := scanner.Text()
 		if line == "" {

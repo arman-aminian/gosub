@@ -2,7 +2,6 @@ package gosub
 
 import (
 	"github.com/arman-aminian/gosub/parsers"
-	"os"
 )
 
 func Parse(path string) (*parsers.Srt, error) {
@@ -24,7 +23,7 @@ func Parse(path string) (*parsers.Srt, error) {
 	return srt, nil
 }
 
-func ParseByFile(f *os.File) (*parsers.Srt, error) {
+func ParseByFile(f []byte) (*parsers.Srt, error) {
 	srt := parsers.NewSrt()
 	err := srt.ParseByFile(f)
 	if err != nil {

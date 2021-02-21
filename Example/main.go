@@ -5,15 +5,14 @@ import (
 	"github.com/arman-aminian/gosub"
 	"github.com/arman-aminian/gosub/cleaners"
 	"github.com/arman-aminian/gosub/parsers"
-	"os"
+	"io/ioutil"
 )
 
 func main() {
-	file, err := os.Open("./Example/test.srt")
+	file, err := ioutil.ReadFile("./Example/Chainz.srt")
 	if err != nil {
 		panic(err)
 	}
-	defer file.Close()
 	s, err := gosub.ParseByFile(file)
 	if err != nil {
 		panic(err)
