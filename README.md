@@ -19,6 +19,18 @@ if err != nil {
 	panic(err)
 }
 ```
+#### Or
+```golang
+file, err := os.Open("./Example/test.srt")
+if err != nil {
+	panic(err)
+}
+defer file.Close()
+s, err := gosub.ParseByFile(file)
+if err != nil {
+	panic(err)
+}
+```
 ___
 
 ## Line Struct
