@@ -68,3 +68,4 @@ Calculate wpm(word per minute):
 * `CalculateMaxWpm` will find the Max WPM.
 * `CalculateMinWpm` will find the min WPM.
 * `CalculateMeanWpm` will find the mean WPM.
+* `TotalWordCount` will caclulate number of words in file.
